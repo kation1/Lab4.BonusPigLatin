@@ -9,17 +9,19 @@ namespace Lab4.BonusPigLatin
         static string PigLatin(string input)
         {
             List<char> vowel = new List<char> { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
+            
 
             string userWord = input;
             bool punctPresent = false;
             string punctuation ="";
 
-            if (userWord.EndsWith("."))
+            if (Char.IsPunctuation(userWord[(userWord.Length-1)]))
             {
                 punctuation = userWord[userWord.Length-1].ToString();
                 userWord = userWord.Remove(userWord.Length-1);
                 punctPresent = true;
              }
+           
             
             if (vowel.Contains(userWord[0]))
             {
@@ -30,6 +32,7 @@ namespace Lab4.BonusPigLatin
                 for (int index = 0; index < input.Length; index++)
 
                 {
+  
                     if (!vowel.Contains(userWord[0]))
                     {
                         userWord += userWord[0];
@@ -51,15 +54,15 @@ namespace Lab4.BonusPigLatin
         }
         static void Main(string[] args)
         {
-
+            Console.WriteLine("Welcome to the Pig Latin Translator!");
             string userCont = "y";
             while (userCont != "n")
             {
 
-                Console.WriteLine("Enter a word");
-                //string userInput = Console.ReadLine();
-                //string userWord = userInput.ToLower();
-                string userPhrase = Console.ReadLine();
+                Console.WriteLine("Enter a line to be translated:");
+                string userInput = Console.ReadLine();
+                string userPhrase = userInput.ToLower();
+               //tring userPhrase = Console.ReadLine();
 
 
                 string[] words = userPhrase.Split(' ');
@@ -67,8 +70,7 @@ namespace Lab4.BonusPigLatin
                 char punctuation = ' ';
                 foreach (string word in words)
                 {
-
-                    
+                        
                         pigPhrase += PigLatin(word) + " ";
                    
                 }
